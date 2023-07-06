@@ -1,0 +1,15 @@
+#!/bin/sh /etc/rc.common
+
+if [ ! -f /sys/class/pwm/pwmchip0/export ]; then
+	exit 0
+fi
+
+### enable fan ###
+/sbin/fan-speed &
+
+num1=`df | grep ubi0_2 | grep overlay | wc -l`
+num2=`df | grep mtdblock10 | grep overlay | wc -l`
+if [ "$num1" == '0' ] && [ "$num2" == '0' ]; then
+        mtd erase /dev/mtd10
+        reboot
+fi

@@ -1,0 +1,21 @@
+#!/bin/sh /etc/rc.common
+
+if [ ! -f /sys/class/gpio/export ]; then
+        exit 0
+fi
+
+### enable M.2 5G RM500U-CN Module Power ###
+echo 431 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio431/direction
+echo   0 > /sys/class/gpio/gpio431/value
+
+sleep 30
+
+result=`lsusb | grep "2c7c:0" | wc -l`
+if [ ${result} -eq 1 ]; then
+	#echo "#########################  Start 5G RM500U-CN Calling Process ############################"
+	#/sbin/quectel-CM 2>&1 | tee -a /var/log/quectel-CM_RM500U-CN_Calling.log
+	#echo "##########################################################################################"
+	/sbin/quectel-CM &
+fi
+

@@ -1,0 +1,14 @@
+#/bin/bash
+
+if [ ! -f /sys/class/gpio/gpio429/direction ]; then
+	echo 429 > /sys/class/gpio/export	### WP 411 + 18 = 429
+fi
+
+echo out > /sys/class/gpio/gpio429/direction
+
+if [ $1 == "0" ]; then
+	echo 1 > /sys/class/gpio/gpio429/value
+else
+	echo 0 > /sys/class/gpio/gpio429/value
+fi
+
