@@ -23,6 +23,8 @@ config zone
 	list network 'wan6'
 	list network 'WWAN'
 	list network 'WWAN6'
+	list network 'WWAN_Q'
+	list network 'WWAN6_Q'
 
 config forwarding
 	option src 'lan'

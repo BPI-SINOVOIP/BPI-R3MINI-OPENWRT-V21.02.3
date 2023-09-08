@@ -43,3 +43,12 @@ config interface 'WWAN6'
 	option reqaddress 'try'
 	option reqprefix 'auto'
 
+config interface 'WWAN_Q'
+	option proto 'dhcp'
+	option device 'wwan0_1'
+
+config interface 'WWAN6_Q'
+	option proto 'dhcpv6'
+	option device 'wwan0_1'
+	option reqaddress 'try'
+	option reqprefix 'auto'
