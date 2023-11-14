@@ -1,4 +1,7 @@
 /dts-v1/;
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
+
 #include "mt7986a.dtsi"
 #include "mt7986a-pinctrl.dtsi"
 #include "mt7986-spim-nand-partition.dtsi"
@@ -191,7 +194,7 @@
 &spi1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&spic_pins_g2>;
-	status = "okay";
+	status = "disabled";
 };
 
 &mmc0 {
@@ -227,6 +230,13 @@
 };
 
 &pio {
+	/* GPIO 11 NGFF_GNSS_OFF. output-high: enable, output-low: disable */
+	gnss_off {
+		gpio-hog;
+		gpios = <11 GPIO_ACTIVE_HIGH>;
+		output-high;
+	};
+
         mmc0_pins_default: mmc0-pins-50-to-61-default {
                 mux {
                         function = "flash";
